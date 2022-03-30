@@ -4,14 +4,27 @@ import About from './components/About';
 import Portfolio from './components/Portfolio'
 import ContactForm from './components/Contact'
 
+const [contactSelected, setContactSelected] = useState(false);
+
 function App() {
   return (
     <div>
-      <Nav></Nav>
+      <Nav
+        categories={categories}
+        setCurrentCategory={setCurrentCategory}
+        currentCategory={currentCategory}
+        contactSelected={contactSelected}
+        setContactSelected={setContactSelected}
+      ></Nav>
       <main className="container my-5">
-        <ContactForm></ContactForm>
-        <About></About>
-        <Portfolio></Portfolio>
+        {!contactSelected ? (
+          <>
+            <About></About>
+            <Portfolio></Portfolio>
+          </>
+        ) : (
+          <ContactForm></ContactForm>
+        )}
       </main>
     </div>
   );
