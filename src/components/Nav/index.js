@@ -1,6 +1,7 @@
 import React from 'react';
+import { capitalizeFirstLetter } from '../../utils/helpers';
 
-function Nav() {
+function Nav(props) {
     const {
         categories = [],
         setCurrentCategory,
@@ -8,9 +9,6 @@ function Nav() {
         contactSelected,
         setContactSelected
     } = props;
-    function categorySelected(name) {
-        console.log(`${name} clicked`)
-    }
     
     return (
         <header>
@@ -28,8 +26,11 @@ function Nav() {
                         <a className={`"ml-2 my-1 px-2 py-1 bg-secondary text-dark" ${
                             currentCategory.name === category.name && !contactSelected && 'navActive'
                         } ` } key={category.name}>
-                            <span onClick={categorySelected(category.name)} >
-                                {category.name}
+                            <span onClick={() => {
+                                setCurrentCategory(category);
+                                setContactSelected(false);
+                            }} >
+                                {capitalizeFirstLetter(category.name)}
                             </span>
                         </a>
                     ))}
