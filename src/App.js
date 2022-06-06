@@ -1,43 +1,33 @@
 import React, { useState } from 'react';
 import Nav from './components/Nav';
 import About from './components/About';
-import Portfolio from './components/Portfolio'
-import ContactForm from './components/Contact'
+import Portfolio from './components/Portfolio';
+import ContactForm from './components/Contact';
 
 function App() {
-  const [categories] = useState([
-    {
-      name: 'commercial',
-      description: 'Photos of grocery stores, food trucks, and other commercial projects',
-    },
-    { name: 'portraits', description: 'Portraits of people in my life' },
-    { name: 'food', description: 'Delicious delicacies' },
-    { name: 'landscape', description: 'Fields, farmhouses, waterfalls, and the beauty of nature' },
-  ]);
-
-  const [currentCategory, setCurrentCategory] = useState(categories[0]);
-
-  const [contactSelected, setContactSelected] = useState(false);
+  const [portfolioSelected, setPortfolioSelected] = useState(false);
 
   return (
     <div>
       <Nav
-        categories={categories}
-        setCurrentCategory={setCurrentCategory}
-        currentCategory={currentCategory}
-        contactSelected={contactSelected}
-        setContactSelected={setContactSelected}
+        setPortfolioSelected={setPortfolioSelected}
+        portfolioSelected={portfolioSelected}
       ></Nav>
       <main className="container my-5">
-        {!contactSelected ? (
+        { !portfolioSelected ? (
           <>
             <About></About>
-            <Portfolio currentCategory={currentCategory}></Portfolio>
+            <ContactForm></ContactForm>
           </>
-        ) : (
-          <ContactForm></ContactForm>
-          )}
+        ) : ( 
+          <>
+            <Portfolio></Portfolio>
+          </>
+        )}
       </main>
+      <footer className="container text-center py-3">
+        <h3 className="text-dark">&copy; 2022 by Ivan Thiessen</h3>
+      </footer>
     </div>
   );
 }
